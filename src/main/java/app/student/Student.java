@@ -1,6 +1,8 @@
 package app.student;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -22,18 +24,20 @@ public class Student {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
+    @Transient
+    private BigDecimal notesMean;
+
     // Default constructor
     public Student() {
     }
 
     // Parameterized constructor
-    public Student(Long id, String fullName, LocalDate creationDate) {
+    public Student(Long id, String fullName, LocalDate creationDate, BigDecimal notesMean) {
         this.id = id;
         this.fullName = fullName;
         this.creationDate = creationDate;
+        this.notesMean = notesMean;
     }
-
-
 
     // Getters
     public Long getId() {
@@ -59,6 +63,14 @@ public class Student {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public BigDecimal getNotesMean() {
+        return notesMean;
+    }
+
+    public void setNotesMean(BigDecimal notesMean) {
+        this.notesMean = notesMean;
     }
 
 

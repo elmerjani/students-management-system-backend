@@ -36,7 +36,7 @@ public class StudentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/students")
     public ResponseEntity<Void> createStudent(@RequestBody Student newStudent) {
-        Student student = new Student(null, newStudent.getFullName(), LocalDate.now());
+        Student student = new Student(null, newStudent.getFullName(), LocalDate.now(),null);
         Student savedStudent = studentManager.addStudent(student);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedStudent.getId()).toUri();
         return ResponseEntity.created(uri).build();

@@ -3,6 +3,8 @@ package app.note;
 import app.student.Student;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +38,16 @@ public class NoteManager {
             throw new NoteNotFoundException();
         }
         return note.get();
+    }
+
+    /**
+     * Calculates the mean of notes for a specific student.
+     *
+     * @param student the student whose notes mean is to be calculated
+     * @return the mean of the student's notes
+     */
+    public BigDecimal calculateMeanForStudent(Student student) {
+        BigDecimal meanNote =  noteRepository.calculateMeanForStudent(student);
+        return (meanNote == null ? null : meanNote.setScale(2, RoundingMode.HALF_UP));
     }
 }
