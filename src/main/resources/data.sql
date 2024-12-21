@@ -21,4 +21,5 @@ INSERT INTO Note (student_id, Course_name, note_value) VALUES
                                                            (6, 'Philosophie', 8.00),
                                                            (6, 'Sociologie', 7.50),
                                                            (6, 'Art', 9.20),
-                                                           (6, 'Musique', 6.80);
+                                                           (6, 'Musique', 6.80),
+                                                           (6,'Physique',12.5);
