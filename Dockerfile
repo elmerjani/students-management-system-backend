@@ -1,15 +1,19 @@
-# Stage 1: Build Stage
-FROM maven:3.8.7-openjdk-17 AS build
+# Build stage
+FROM maven:3.8.4-openjdk-17-slim AS build
 WORKDIR /app
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline
+
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Runtime Stage
-FROM openjdk:17-jdk-alpine
+# Run stage
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
-COPY --from=build /app/target/*.jar backend.jar
+COPY --from=build /app/target/*.jar app.jar
+
+RUN addgroup --system javauser && adduser --system --ingroup javauser javauser
+USER javauser
+
 EXPOSE 8080
-USER nonroot
-ENTRYPOINT ["java", "-jar", "backend.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
