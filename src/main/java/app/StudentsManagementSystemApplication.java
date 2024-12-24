@@ -23,7 +23,12 @@ public class StudentsManagementSystemApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(
+                                "http://my-frontend-app",
+                                "http://my-frontend-app:80",
+                                "http://localhost:80",
+                                "http://localhost"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
