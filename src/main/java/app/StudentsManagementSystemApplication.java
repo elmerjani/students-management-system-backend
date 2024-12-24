@@ -17,18 +17,15 @@ public class StudentsManagementSystemApplication {
         SpringApplication.run(StudentsManagementSystemApplication.class, args);
     }
 
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "http://my-frontend-app",
-                                "http://my-frontend-app:80",
-                                "http://localhost:80",
-                                "http://localhost"
-                        )
+                        .allowedOrigins("http://my-frontend-app:80",
+                                "http://localhost:80")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
